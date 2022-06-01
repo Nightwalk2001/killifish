@@ -1,7 +1,8 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import App from "./App"
-import {appWindow} from "@tauri-apps/api/window"
+import {appWindow}  from "@tauri-apps/api/window"
+import React        from "react"
+import ReactDOM     from "react-dom/client"
+import {RecoilRoot} from "recoil"
+import App          from "./App"
 import "./styles/index.css"
 
 const clickHandler = (id: string, handler: () => Promise<void>) =>
@@ -13,4 +14,4 @@ clickHandler("titlebar-close", appWindow.close)
 
 const root = document.getElementById("root") as HTMLDivElement
 
-ReactDOM.createRoot(root).render(<App/>)
+ReactDOM.createRoot(root).render(<RecoilRoot><App/></RecoilRoot>)

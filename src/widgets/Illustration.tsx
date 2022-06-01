@@ -1,4 +1,4 @@
-import Lottie from "lottie-web"
+import Lottie                               from "lottie-web"
 import {HTMLProps, memo, useEffect, useRef} from "react"
 
 type Props = {

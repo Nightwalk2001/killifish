@@ -7,7 +7,7 @@
         "distDir": "../dist"
     },
     "package": {
-        "productName": "killifish",
+        "productName": "killifish feeding system",
         "version": "0.1.0"
     },
     "tauri": {
@@ -61,11 +61,11 @@
         },
         "windows": [
             {
-                "width": 960,
-                "height": 540,
+                "width": 1000,
+                "height": 620,
                 "fullscreen": false,
                 "resizable": true,
-                "title": "非洲鳉鱼饲喂系统",
+                "title": "killifish feeding system",
                 "decorations": false,
                 "transparent": true
             }

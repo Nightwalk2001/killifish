@@ -1,7 +1,8 @@
-import {get}  from "@/libs"
 import {atom} from "recoil"
 
-export const profileAtom = atom({
+const DEFAULT = undefined
+
+export const profileAtom = atom<Profile>({
     key: "profile",
-    default: get<Profile>("profile"),
+    default: DEFAULT
 })

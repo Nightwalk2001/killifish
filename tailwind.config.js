@@ -8,6 +8,11 @@ module.exports = {
     ],
     theme: {
         extend: {
+            maxWidth:{
+                "2xs": "16rem",
+                "3xs": "12rem",
+                "4xs":"8rem"
+            },
             spacing: {
                 "1/10": "10%",
                 "9/10": "90%",
@@ -32,7 +37,7 @@ module.exports = {
             ringWidth: {
                 "1.5": "1.5px",
             },
-        },
+        }
     },
     plugins: [],
 }

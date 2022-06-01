@@ -1,23 +1,32 @@
-import {Navigate, useLocation, useNavigate, useOutlet, useRoutes} from "react-router-dom"
-import {MenuIcon}                                                 from "./MenuIcon"
+import {profileAtom}    from "@/stores"
+import {useNavigate}    from "react-router-dom"
+import {useRecoilValue} from "recoil"
+import {MenuIcon}       from "./MenuIcon"
+import {Profile}        from "./Profile"
 
 export const TopBar = () => {
   const navigate = useNavigate()
+
+  const profile = useRecoilValue(profileAtom)
 
   const goBack    = () => navigate(-1),
         goForward = () => navigate(1),
         refresh   = () => navigate(0)
 
   return <div
-    className={"sticky left-0 top-0 z-100 flex-center justify-between w-full pt-3 pb-2 pl-10 lg:pl-20 bg-gray-50 shadow"}>
+    className={`${profile ? "visible" : "invisible"}
+    sticky left-0 top-0 z-100 flex-center justify-between
+     w-full pt-3 pb-2 pl-10 lg:pl-20 bg-gray-50 shadow`}>
     <div className={"flex-center space-x-1 font-medium text-gray-600 select-none"}>
 
       <MenuIcon onClick={goBack}>
-        <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        <path fillRule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
       </MenuIcon>
 
       <MenuIcon onClick={goForward}>
-        <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        <path fillRule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
       </MenuIcon>
 
       <MenuIcon onClick={refresh}>
@@ -31,30 +40,18 @@ export const TopBar = () => {
       <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>监测</button>
     </div>
 
-    <div className={"flex items-center"}>
-      <div className={"relative"}>
-        <input
-          type={"search"}
-          placeholder={"功能尚未完成，不可搜索"}
-          className={`w-80 h-9 pl-8 pr-3 py-1 text-sm bg-gray-100 rounded-l-md outline-none ring-inset select-none
-    transition-color duration-150 focus:text-gray-600 focus:bg-white focus:ring-1 focus:ring-r-none focus:ring-gray-300`}
-        />
-        <svg viewBox={"0 0 32 32"}
-             className={"absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 stroke-current opacity-30"}>
-          <path
-            d={"M30.707,29.293l-6.846-6.846a13.039,13.039,0,1,0-1.414,1.414l6.846,6.846a1,1,0,0,0,1.414-1.414ZM3,14A11,11,0,1,1,14,25,11.013,11.013,0,0,1,3,14Z"}/>
-        </svg>
+    <div className={"relative"}>
+      <input
+        placeholder={"search by id/owner/genotype/sexual"}
+        className={`w-80 h-9 pl-9 pr-3 py-1 text-sm bg-gray-100 rounded-md outline-none ring-inset select-none
+    transition-color duration-150 focus:text-gray-600 focus:bg-white focus:ring-1 focus:ring-gray-300`}
+      />
+      <svg viewBox={"0 0 32 32"}
+           className={"absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 stroke-current opacity-30"}>
+        <path
+          d={"M30.707,29.293l-6.846-6.846a13.039,13.039,0,1,0-1.414,1.414l6.846,6.846a1,1,0,0,0,1.414-1.414ZM3,14A11,11,0,1,1,14,25,11.013,11.013,0,0,1,3,14Z"}/>
+      </svg>
 
-      </div>
-      <button
-        className={`relative flex items-center h-9 justify-between pl-2 pr-6 border-[1px] border-l-transparent border-gray-200
-      rounded-r-md transition-color duration-75 hover:bg-gray-100 hover:border-l-white`}>
-        <span className={"text-gray-500"}>姓名</span>
-        <svg viewBox={"0 0 24 24"}
-             className={"absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 fill-transparent stroke-gray-900 opacity-30"}>
-          <path strokeLinecap={"round"} strokeLinejoin={"round"} strokeWidth={2} d={"M19 9l-7 7-7-7"}/>
-        </svg>
-      </button>
     </div>
 
     <div className={"flex-center space-x-1"}>
@@ -72,9 +69,7 @@ export const TopBar = () => {
         </svg>
       </button>
 
-      <div className={"p-1 rounded-md cursor-pointer hover:bg-[#ededed]"}>
-        <img src={"/avatar.png"} alt={""} className={"w-7 h-7 rounded-full"}/>
-      </div>
+      <Profile/>
     </div>
   </div>
 }

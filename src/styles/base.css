@@ -4,21 +4,25 @@ html {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
+::-ms-reveal {
+    display: none;
+}
+
 body {
     overflow: overlay;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background-color: #45f6f6;
-}
-
-::-webkit-scrollbar-track {
-    border-radius: 8px;
-}
-
 ::-webkit-scrollbar {
-    height: 8px;
-    width: 9px;
+    width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #98f3e9;
+    border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #42e8e8;
 }
 
 div::selection,

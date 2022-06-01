@@ -1,5 +1,5 @@
 {
-    "name": "killifish",
+    "name": "killifish-feeding-system",
     "private": true,
     "version": "0.0.0",
     "scripts": {
@@ -11,33 +11,41 @@
         "tauricon": "tauricon ./src-tauri/app-icon.png"
     },
     "dependencies": {
-        "@tauri-apps/api": "^1.0.0-rc.5",
+        "@tauri-apps/api": "^1.0.0-rc.6",
         "d3-array": "^3.1.6",
         "d3-scale": "^4.0.2",
         "d3-selection": "^3.0.0",
+        "d3-shape": "^3.1.0",
+        "date-fns": "^2.28.0",
         "file-saver": "^2.0.5",
-        "framer-motion": "^6.3.3",
+        "framer-motion": "^6.3.4",
         "lottie-web": "^5.9.4",
+        "meilisearch": "^0.25.1",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
         "react-router-dom": "^6.3.0",
-        "recoil": "^0.7.2",
-        "xlsx": "^0.18.5"
+        "recoil": "^0.7.3-alpha.2",
+        "swr": "^1.3.0",
+        "xlsx": "^0.18.5",
+        "yup": "^0.32.11",
+        "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store"
     },
     "devDependencies": {
-        "@tauri-apps/cli": "^1.0.0-rc.11",
-        "@types/d3-array": "^3.0.2",
+        "@headlessui/react": "^1.6.4",
+        "@tauri-apps/cli": "^1.0.0-rc.13",
+        "@tauri-apps/tauricon": "github:tauri-apps/tauricon",
+        "@types/d3-array": "^3.0.3",
         "@types/d3-scale": "^4.0.2",
         "@types/d3-selection": "^3.0.2",
+        "@types/d3-shape": "^3.1.0",
         "@types/file-saver": "^2.0.5",
         "@types/react": "^18.0.9",
-        "@types/react-dom": "^18.0.4",
+        "@types/react-dom": "^18.0.5",
         "@vitejs/plugin-react": "^1.3.2",
         "autoprefixer": "^10.4.7",
         "postcss": "^8.4.14",
         "tailwindcss": "^3.0.24",
-        "typescript": "^4.6.4",
-        "@headlessui/react": "^1.6.2",
+        "typescript": "^4.4.4",
         "vite": "^2.9.9"
     }
 }

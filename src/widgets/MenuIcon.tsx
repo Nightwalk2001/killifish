@@ -1,4 +1,4 @@
-import {ButtonHTMLAttributes, HTMLProps} from "react"
+import {ButtonHTMLAttributes} from "react"
 
 type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">
 
