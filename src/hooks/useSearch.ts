@@ -4,28 +4,31 @@ import {useEffect, useState}     from "react"
 
 type Distribution = Record<string, Record<string, number>>
 
-export const useSearch = (query?: string, options?: SearchParams, deps?: any[], immediate = true) => {
+export const useSearch = (query?: string, options?: SearchParams, deps?: any[]) => {
 
     const [data, setData]                 = useState<Hits<Tank>>(),
           [count, setCount]               = useState<number>(0),
-          [distribution, setDistribution] = useState<Distribution>(),
-          [time, setTime]                 = useState<number>()
+          [distribution, setDistribution] = useState<Distribution>()
 
     const search = async () => {
-        const result = await client.search<Tank>(query, options)
+        const {
+                  hits,
+                  nbHits,
+                  facetsDistribution,
+                  processingTimeMs
+              } = await client.search<Tank>(query, options)
 
-        setData(result.hits)
-        setCount(result.nbHits)
-        setDistribution(result.facetsDistribution)
-        setTime(result.processingTimeMs)
+        setData(hits)
+        setCount(nbHits)
+        setDistribution(facetsDistribution)
     }
 
     useEffect(() => {
-        if (immediate) search().then()
+        search().then()
     }, deps)
 
-    return {data, count, distribution, time, mutate: search}
+    return {data, count, distribution, mutate: search}
 }
 
-export const useFaceted = (facets: string[], query?: string, options?: SearchParams) =>
-    useSearch(query, {facetsDistribution: facets, ...options})
+export const useFaceted = (facets: string[], query?: string, options?: SearchParams, deps?: any[]) =>
+    useSearch(query, {facetsDistribution: facets, ...options}, deps)

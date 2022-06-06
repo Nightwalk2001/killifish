@@ -19,15 +19,15 @@ export const TopBar = () => {
      w-full pt-3 pb-2 pl-10 lg:pl-20 bg-gray-50 shadow`}>
     <div className={"flex-center space-x-1 font-medium text-gray-600 select-none"}>
 
-      <MenuIcon onClick={goBack}>
-        <path fillRule="evenodd"
-              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-      </MenuIcon>
+      {/*<MenuIcon onClick={goBack}>*/}
+      {/*  <path fillRule="evenodd"*/}
+      {/*        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>*/}
+      {/*</MenuIcon>*/}
 
-      <MenuIcon onClick={goForward}>
-        <path fillRule="evenodd"
-              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-      </MenuIcon>
+      {/*<MenuIcon onClick={goForward}>*/}
+      {/*  <path fillRule="evenodd"*/}
+      {/*        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>*/}
+      {/*</MenuIcon>*/}
 
       <MenuIcon onClick={refresh}>
         <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -35,9 +35,18 @@ export const TopBar = () => {
           d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
       </MenuIcon>
 
-      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>用户</button>
-      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>鱼缸</button>
-      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>监测</button>
+      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>Workspace</button>
+      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>Monitor</button>
+      <button
+        className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}
+        onClick={() => navigate("/routine")}>
+        Routine
+      </button>
+      <button
+        className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}
+        onClick={() => navigate("/todos")}>
+        Todo
+      </button>
     </div>
 
     <div className={"relative"}>
