@@ -1,11 +1,11 @@
-import {store}                                                                                from "@/libs"
-import {Homepage, Management, NotFound, Recordings, Routine, SignIn, Tanks, Todos, Workspace} from "@/pages"
-import {profileAtom}                                                                          from "@/stores"
-import {TopBar}                                                                               from "@/widgets"
-import React, {useEffect}                                                                     from "react"
-import {BrowserRouter as Router, Route, Routes}                                               from "react-router-dom"
-import {ToastContainer}                                                                       from "react-toastify"
-import {useRecoilState}                                                                       from "recoil"
+import {store}                                                                    from "@/libs"
+import {Homepage, NotFound, Recordings, Routine, SignIn, Tanks, Todos, Workspace} from "@/pages"
+import {profileAtom}                                                              from "@/stores"
+import {TopBar}                                                                   from "@/widgets"
+import React, {useEffect}                                                         from "react"
+import {BrowserRouter as Router, Route, Routes}                                   from "react-router-dom"
+import {ToastContainer}                                                           from "react-toastify"
+import {useRecoilState}                                                           from "recoil"
 
 const App = () => {
   const [profile, setProfile] = useRecoilState(profileAtom)
@@ -29,7 +29,6 @@ const App = () => {
         <Route path={"/workspace"} element={<Workspace/>}/>
         <Route path={"/routine"} element={<Routine/>}/>
         <Route path={"/todos"} element={<Todos/>}/>
-        <Route path={"/management"} element={<Management/>}/>
         <Route path={"/tanks/:name"} element={<Tanks/>}/>
         <Route path={"/recordings/:name"} element={<Recordings/>}/>
         <Route path={"*"} element={<NotFound/>}/>

@@ -101,6 +101,7 @@ const forms = plugin.withOptions(function (options = {strategy: undefined}) {
     }
 })
 
+/** @type {import("tailwindcss").Config} */
 module.exports = {
     content: [
         "./index.html",

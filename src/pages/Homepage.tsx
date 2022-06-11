@@ -1,8 +1,8 @@
-import {useName, useSearch}   from "@/hooks"
-import {mainPart}             from "@/libs"
-import {PieChart, RatioChart} from "@/widgets"
-import {sum}                  from "d3-array"
-import {useNavigate}          from "react-router-dom"
+import {useName, useSearch}             from "@/hooks"
+import {mainPart}                       from "@/libs"
+import {AgeChart, PieChart, RatioChart} from "@/widgets"
+import {sum}                            from "d3-array"
+import {useNavigate}                    from "react-router-dom"
 
 export const Homepage = () => {
   const name = useName()
@@ -30,6 +30,9 @@ export const Homepage = () => {
 
     </div>
     <div className={"w-3/5"}>
+
+      <AgeChart/>
+
       <h2>total fishes: {fishAmount}</h2>
       <h2>main genotype: <span
         className={"uppercase text-gray-700 font-medium"}>

@@ -50,13 +50,11 @@ export const SelectorIcon = (props: SVGProps<SVGSVGElement>) =>
 
 export const CheckIcon = (props: SVGProps<SVGSVGElement>) =>
   <svg
-    viewBox="0 0 20 20"
+    viewBox="0 0 16 16"
     className={"fill-current"}
     {...props}>
     <path
-      fillRule="evenodd"
-      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-      clipRule="evenodd"/>
+      d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
   </svg>
 
 export const ChevronDownIcon = (props: SVGProps<SVGSVGElement>) =>
@@ -78,4 +76,23 @@ export const DoneIcon = (props: SVGProps<SVGSVGElement>) =>
     <path
       d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
     <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
+  </svg>
+
+export const XCircleIcon = (props: SVGProps<SVGSVGElement>) =>
+  <svg
+    viewBox="0 0 16 16"
+    className="fill-current"
+    {...props}>
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path
+      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+  </svg>
+
+export const AddIcon = (props: SVGProps<SVGSVGElement>) =>
+  <svg
+    viewBox="0 0 16 16"
+    className="fill-current"
+    {...props}>
+    <path fillRule="evenodd"
+          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
   </svg>

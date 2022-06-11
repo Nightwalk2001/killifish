@@ -1,7 +1,6 @@
 export * from "./SignIn"
 export * from "./Workspace"
 export * from "./Routine"
-export * from "./Management"
 export * from "./Tanks"
 export * from "./NotFound"
 export * from "./Homepage"

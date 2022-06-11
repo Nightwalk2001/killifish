@@ -35,8 +35,19 @@ export const TopBar = () => {
           d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
       </MenuIcon>
 
-      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>Workspace</button>
-      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>Monitor</button>
+      <button
+        className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}
+        onClick={() => navigate("/")}>
+        Home
+      </button>
+      <button
+        className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}
+        onClick={() => navigate("/")}
+      >
+        Workspace
+      </button>
+      <button className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}>Monitor
+      </button>
       <button
         className={"px-2.5 py-0.5 rounded-sm hover:text-white hover:bg-cyan-400/80 cursor-pointer"}
         onClick={() => navigate("/routine")}>
@@ -51,8 +62,8 @@ export const TopBar = () => {
 
     <div className={"relative"}>
       <input
-        placeholder={"search by id/owner/genotype/sexual"}
-        className={`w-80 h-9 pl-9 pr-3 py-1 text-sm bg-gray-100 rounded-md outline-none ring-inset select-none
+        placeholder={"id/owner/genotype/sexual"}
+        className={`w-64 h-9 pl-9 pr-3 py-1 text-sm bg-gray-100 rounded-md outline-none ring-inset select-none
     transition-color duration-150 focus:text-gray-600 focus:bg-white focus:ring-1 focus:ring-gray-300`}
       />
       <svg viewBox={"0 0 32 32"}

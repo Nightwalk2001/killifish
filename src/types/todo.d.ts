@@ -1,8 +1,8 @@
 declare type Todo = {
-    id: string
+    _id: string
     creator: string
     content: string
-    create_at: string
+    createAt: string
     completed: boolean
-    complete_at?: string
+    completeAt?: string
 }
