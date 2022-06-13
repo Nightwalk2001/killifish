@@ -1,8 +1,6 @@
-const defaultTheme = require("tailwindcss/defaultTheme")
 const plugin = require("tailwindcss/plugin")
 const colors = require("tailwindcss/colors")
-const {spacing, borderWidth} = defaultTheme
-const {fontFamily} = defaultTheme
+const {spacing, borderWidth,fontFamily} = require("tailwindcss/defaultTheme")
 const svgToDataUri = require("mini-svg-data-uri")
 
 const forms = plugin.withOptions(function (options = {strategy: undefined}) {
@@ -20,7 +18,7 @@ const forms = plugin.withOptions(function (options = {strategy: undefined}) {
 
         const rules = [
             {
-                base: [`[type='checkbox']`],
+                base: [`[type="checkbox"]`,`[type="ratio"]`],
                 styles: {
                     appearance: "none",
                     padding: "0",
@@ -40,7 +38,7 @@ const forms = plugin.withOptions(function (options = {strategy: undefined}) {
                 },
             },
             {
-                base: [`[type='checkbox']:focus`],
+                base: [`[type='checkbox']:focus`,`[type="ratio"]:focus`],
                 styles: {
                     outline: "2px solid transparent",
                     "outline-offset": "2px",

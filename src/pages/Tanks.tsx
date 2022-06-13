@@ -106,6 +106,10 @@ export const Tanks = () => {
     </PopFilter>
   </div>
 
+  const toRecordings = (id: string) => {
+    navigate(`/recordings/${id}`)
+  }
+
   return <main className={"pl-8 pr-6 my-4"}>
     <h2 className={"mb-2 text-lg text-gray-600 tracking-wider"}>
       <strong className={"mx-0.5 font-semibold text-gray-600"}>{count} </strong>
@@ -124,7 +128,7 @@ export const Tanks = () => {
           // animate={{opacity: [0.4, 1]}}
           // transition={{duration: 0.01, delay: 0.0103 * i}}
           className={"relative h-20 px-2 py-1.5 text-white bg-blue-400/90 rounded-md"}
-          onClick={() => navigate(`/recordings/${"LMJ"}`)}
+          onClick={() => toRecordings(d.id)}
         >
           <div>鱼缸编号：{d.id}</div>
           {/*<div>所有者：{d.owner}</div>*/}

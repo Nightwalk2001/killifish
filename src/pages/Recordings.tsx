@@ -1,8 +1,10 @@
-import {useName, useRequest} from "@/hooks"
-import {getter}              from "@/libs"
-import {PopFilter}           from "@/widgets"
-import {differenceInDays}    from "date-fns"
-import {motion}              from "framer-motion"
+import {useFindOne, useRequest} from "@/hooks"
+import {classNames, getter}     from "@/libs"
+import {PopFilter, TankProfile} from "@/widgets"
+import {differenceInDays}       from "date-fns"
+import {motion}                 from "framer-motion"
+import {ChangeEvent, useState}  from "react"
+import {useParams}              from "react-router-dom"
 
 const headers = [
   "owner",
@@ -13,101 +15,138 @@ const headers = [
   "quantity",
   "trigger",
   "time",
-  "result"]
+  "result"
+]
+
+type InputChangeEvent = ChangeEvent<HTMLInputElement>
 
 const cellStyle = "table-cell px-0.5 text-gray-500 border-b border-slate-200 align-middle"
 
-const dates = ["2001"]
+const triggers  = ["ALL", "AUTO", "MANUAL"],
+      results   = ["ALL", "SUCCESS", "FAIL"],
+      pagesizes = ["10", "15", "20", "30", "50"],
+      dates     = ["ALL", "within 3 days"],
+      sorts     = ["None", "owner", "genotype", "age", "time"]
 
 export const Recordings = () => {
-  const name = useName()
-  const {data} = useRequest<Recording[]>(`/recordings?owner=${name}`, getter)
+  const {id} = useParams()
 
-  const searchPanel = <div className={"flex space-x-8 my-3"}>
-    <PopFilter name={"trigger"}>
-      <div className={"w-12 rounded-lg bg-white"}>
-        <div className="px-2">
-          {dates.map(d => <div key={d} className="pb-2">
-              <input type="radio" name="type"
-                     value="all"
-                     id="all" className="styledRadio"/>
-              <label
-                htmlFor="all"
-                className="text-xs font-grey-darker font-lf-regular font-normal">{d}</label>
-            </div>
-          )}
-        </div>
-      </div>
-    </PopFilter>
-    <PopFilter name={"result"}>
-      <div className={"w-12 rounded-lg bg-white"}>
-        <div className="px-2">
-          {dates.map(d => <div key={d} className="pb-2">
-              <input type="radio" name="type"
-                     value="all"
-                     id="all" className="styledRadio"/>
-              <label
-                htmlFor="all"
-                className="text-xs font-grey-darker font-lf-regular font-normal">{d}</label>
-            </div>
-          )}
-        </div>
-      </div>
-    </PopFilter>
-    <PopFilter name={"age"}>
-      <div className={"w-12 rounded-lg bg-white"}>
-        <div className="px-2">
-          {dates.map(d => <div key={d} className="pb-2">
-              <input type="radio" name="type"
-                     value="all"
-                     id="all" className="styledRadio"/>
-              <label
-                htmlFor="all"
-                className="text-xs font-grey-darker font-lf-regular font-normal">{d}</label>
-            </div>
-          )}
-        </div>
-      </div>
-    </PopFilter>
-    <PopFilter name={"page size"}>
-      <div className={"w-12 rounded-lg bg-white"}>
-        <div className="px-2">
-          {dates.map(d => <div key={d} className="pb-2">
-              <input type="radio" name="type"
-                     value="all"
-                     id="all" className="styledRadio"/>
-              <label
-                htmlFor="all"
-                className="text-xs font-grey-darker font-lf-regular font-normal">{d}</label>
-            </div>
-          )}
-        </div>
-      </div>
-    </PopFilter>
-    <PopFilter name={"Sort by"}>
-      <div className={"w-12 rounded-lg bg-white"}>
-        <div className="px-2">
-          {dates.map(d => <div key={d} className="pb-2">
-              <input type="radio" name="type"
-                     value="all"
-                     id="all" className="styledRadio"/>
-              <label
-                htmlFor="all"
-                className="text-xs font-grey-darker font-lf-regular font-normal">{d}</label>
-            </div>
-          )}
-        </div>
-      </div>
-    </PopFilter>
-  </div>
+  const {data: tank} = useFindOne(id)
+
+  const [trigger, setTrigger]   = useState<string>(triggers[0]),
+        [result, setResult]     = useState<string>(results[0]),
+        [pagesize, setPagesize] = useState<string>(pagesizes[0]),
+        [date, setDate]         = useState<string>(dates[0]),
+        [sort, setSort]         = useState<string>(sorts[0])
+
+  const params = `id=${id}&trigger=${trigger}&result=${result === "SUCCESS"}&pagesize=${pagesize}`
+
+  const {data} = useRequest<Recording[]>("/recordings?" + params, getter)
+
+  const handleTrigger  = (ev: InputChangeEvent) => setTrigger(ev.target.value),
+        handleResult   = (ev: InputChangeEvent) => setResult(ev.target.value),
+        handlePagesize = (ev: InputChangeEvent) => setPagesize(ev.target.value),
+        handleDate     = (ev: InputChangeEvent) => setDate(ev.target.value)
 
   return <div className={"w-11/12 mx-auto mt-8 mb-5 "}>
+    <div>{params}</div>
 
-    {searchPanel}
+    {tank &&  <TankProfile {...tank}/>}
+
+    <div>
+      operations: <button className={"px-3 py-2 text-white bg-sky-300 rounded-md"}>Manually Feed</button>
+    </div>
+
+    <div className={"flex space-x-8 my-3"}>
+      <PopFilter name={"trigger"} active={trigger != "ALL"}>
+        <div className="px-2" onChange={handleTrigger}>
+          {triggers.map(d => <div key={d} className={"flex items-center pb-2"}>
+              <input
+                type="radio"
+                name="trigger"
+                id={d}
+                value={d}
+                checked={d === trigger}
+                className={"styledRadio"}
+              />
+              <label htmlFor={d} className="text-xs font-grey-darker font-normal">{d}</label>
+            </div>
+          )}
+        </div>
+      </PopFilter>
+
+      <PopFilter name={"result"}>
+        <div className="px-2" onChange={handleResult}>
+          {results.map(d => <div key={d} className={"flex items-center pb-2"}>
+              <input
+                type="radio"
+                name="date"
+                id={d}
+                value={d}
+                className={"styledRadio"}
+              />
+              <label htmlFor={d} className="text-xs font-grey-darker font-normal">{d}</label>
+            </div>
+          )}
+        </div>
+      </PopFilter>
+
+      <PopFilter name={"age"} className={"w-36"}>
+        <div className="px-2" onChange={handleDate}>
+          {dates.map(d => <div key={d} className={"flex items-center pb-2"}>
+              <input
+                type="radio"
+                name="date"
+                id={d}
+                value={d}
+                className={"styledRadio"}
+              />
+              <label htmlFor={d} className="text-xs font-grey-darker font-normal whitespace-nowrap">{d}</label>
+            </div>
+          )}
+        </div>
+      </PopFilter>
+
+      <PopFilter name={"page size"} className={"w-36"}>
+        <div className="px-2 grid grid-cols-2 place-content-center gap-x-3" onChange={handlePagesize}>
+          {pagesizes.map(d => <div key={d} className={"flex items-center pb-2"}>
+              <input
+                type="radio"
+                name="pagesize"
+                id={d}
+                value={d}
+                className={"styledRadio"}
+              />
+              <label htmlFor={d} className="text-xs font-grey-darker font-normal">{d}</label>
+            </div>
+          )}
+        </div>
+      </PopFilter>
+
+      <PopFilter name={"sort by"}>
+        <div className="px-2" onChange={handleDate}>
+          {sorts.map(d => <div key={d} className={"flex items-center pb-2"}>
+              <input
+                type="radio"
+                name="trigger"
+                id={d}
+                value={d}
+                className={"styledRadio"}
+              />
+              <label htmlFor={d} className="text-xs font-grey-darker font-normal">{d}</label>
+            </div>
+          )}
+        </div>
+      </PopFilter>
+    </div>
+
+    {
+      <div>filters: </div>
+    }
 
     <div
-      className={"shadow overflow-x-scroll border-b border-gray-200 sm:rounded-md recording-table"}>
-      <motion.div layout className={"table w-full"}>
+      className={"shadow overflow-x-scroll overflow-y-hidden border-b border-gray-200 sm:rounded-md recording-table"}>
+      <div className={"table table-fixed w-full"}>
         <div className={"table-header-group text-center"}>
           <div className={"table-row"}>
             {
@@ -119,10 +158,10 @@ export const Recordings = () => {
                 </div>)}
           </div>
         </div>
-        <div className={"table-row-group bg-white"}>
+        <motion.div layout={"size"} className={"table-row-group bg-white"}>
           {data && data.map(d =>
             <div
-              key={`${d.tankId}-${d.time}`}
+              key={`${d.tank}-${d.time}`}
               className={"table-row text-center text-gray-700"}>
               {/*<div className={`${cellStyle} py-2.5`}>{d.tankId}</div>*/}
               <div className={`${cellStyle} py-2.5`}>{d.owner}</div>
@@ -132,18 +171,16 @@ export const Recordings = () => {
               <div className={cellStyle}>{differenceInDays(Date.parse(d.birthday!), new Date())}d</div>
               <div className={`${cellStyle} py-2.5`}>{d.quantity}</div>
 
-              {Math.random() < 0.75
-                ? <div className={`${cellStyle} font-semibold text-cyan-400/90`}>
-                  AUTO
-                </div>
-                : <div className={`${cellStyle} font-semibold text-indigo-300`}>
-                  MANUAL
-                </div>
-              }
+              <div
+                className={
+                  classNames(cellStyle,
+                    "py-2.5 font-medium",
+                    d.trigger === "AUTO" ? "text-indigo-300" : "text-cyan-400")
+                }>{d.trigger}</div>
 
               <div className={`${cellStyle} whitespace-nowrap`}>{d.time}</div>
 
-              {Math.random() < 0.95
+              {d.succeed
                 ? <div className={cellStyle}>
                   <svg viewBox="0 0 512 512" className={"w-7 scale-95 mx-auto text-green-500/80"}>
                     <path fill="none" stroke="currentColor" strokeLinecap="square" strokeMiterlimit="10"
@@ -159,8 +196,8 @@ export const Recordings = () => {
               }
             </div>
           )}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
 
   </div>

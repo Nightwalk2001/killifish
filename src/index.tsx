@@ -12,6 +12,15 @@ clickHandler("titlebar-minimize", appWindow.minimize)
 clickHandler("titlebar-maximize", appWindow.toggleMaximize)
 clickHandler("titlebar-close", appWindow.close)
 
+// document.addEventListener(
+//   "contextmenu",
+//   e => {
+//     e.preventDefault()
+//     return false
+//   },
+//   {capture: true}
+// )
+
 const root = document.getElementById("root") as HTMLDivElement
 
 ReactDOM.createRoot(root).render(<RecoilRoot><App/></RecoilRoot>)

@@ -1,10 +1,11 @@
 declare type Recording = {
-    tankId: string
+    tank: string
     owner: string
-    size: string
     genotype?: string
     sexual?: string
     birthday?: string
     quantity: number
+    trigger: string
     time: string
+    succeed: boolean
 }

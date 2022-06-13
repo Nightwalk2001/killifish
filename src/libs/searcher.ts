@@ -7,5 +7,4 @@ const client = new MeiliSearch({
 })
     .index<Tank>("tanks")
 
-
 export {client}
