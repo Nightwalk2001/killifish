@@ -1,11 +1,13 @@
-import {useName, useSearch}             from "@/hooks"
-import {mainPart}                       from "@/libs"
-import {AgeChart, PieChart, RatioChart} from "@/widgets"
-import {sum}                            from "d3-array"
-import {useNavigate}                    from "react-router-dom"
+import {useName, useRequest, useSearch} from "@/hooks"
+import {getter, mainPart} from "@/libs"
+import {PieChart, RatioChart, StreamChart} from "@/widgets"
+import {sum} from "d3-array"
+import {useNavigate} from "react-router-dom"
 
 export const Homepage = () => {
   const name = useName()
+
+  const {data: todos, mutate} = useRequest<Todo[]>("/todos", getter)
 
   const {data, count, distribution} = useSearch(name, {facetsDistribution: ["amount", "genotype", "species"]}, [])
 
@@ -28,10 +30,16 @@ export const Homepage = () => {
         see monitor analysis
       </button>
 
+      <h2 className={"text-xl"}>Todo List</h2>
+      <div>
+        {todos && todos.slice(10).map(d => <div key={d._id}>
+          {d.content}
+        </div>)}
+      </div>
     </div>
     <div className={"w-3/5"}>
 
-      <AgeChart/>
+      <StreamChart/>
 
       <h2>total fishes: {fishAmount}</h2>
       <h2>main genotype: <span

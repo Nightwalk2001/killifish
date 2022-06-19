@@ -1,10 +1,10 @@
-import {useName, useRequest}        from "@/hooks"
-import {classNames, getter, poster} from "@/libs"
-import {AddIcon}                    from "@/widgets/Icons"
-import {Tab}                        from "@headlessui/react"
-import {motion}                     from "framer-motion"
-import {ChangeEvent, useState}      from "react"
-import {toast}                      from "react-toastify"
+import {useName, useRequest} from "@/hooks"
+import {clsx, getter, poster} from "@/libs"
+import {AddIcon} from "@/widgets/Icons"
+import {Tab} from "@headlessui/react"
+import {motion} from "framer-motion"
+import {ChangeEvent, useState} from "react"
+import {toast} from "react-toastify"
 
 const categories = ["TODO", "DONE", "ALL"]
 
@@ -54,7 +54,7 @@ export const Todos = () => {
           <Tab
             key={category}
             className={({selected}) =>
-              classNames(
+              clsx(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-500/90",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-300 focus:outline-none focus:ring-2",
                 selected
@@ -69,7 +69,7 @@ export const Todos = () => {
       </Tab.List>
       <Tab.Panels className="mt-2">
         <Tab.Panel
-          className={classNames(
+          className={clsx(
             "rounded-xl bg-white p-3",
             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400/80 focus:outline-none focus:ring-2"
           )}
@@ -94,7 +94,7 @@ export const Todos = () => {
 
                 <a
                   href="#"
-                  className={classNames(
+                  className={clsx(
                     "absolute inset-0 rounded-md",
                     "ring-blue-400/80 focus:z-10 focus:outline-none focus:ring-2"
                   )}
@@ -105,7 +105,7 @@ export const Todos = () => {
         </Tab.Panel>
 
         <Tab.Panel
-          className={classNames(
+          className={clsx(
             "rounded-xl bg-white p-3",
             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400/80 focus:outline-none focus:ring-2"
           )}
@@ -130,7 +130,7 @@ export const Todos = () => {
 
                 <a
                   href="#"
-                  className={classNames(
+                  className={clsx(
                     "absolute inset-0 rounded-md",
                     "ring-blue-400/80 focus:z-10 focus:outline-none focus:ring-2"
                   )}
@@ -141,7 +141,7 @@ export const Todos = () => {
         </Tab.Panel>
 
         <Tab.Panel
-          className={classNames(
+          className={clsx(
             "rounded-xl bg-white p-3",
             "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400/80 focus:outline-none focus:ring-2"
           )}
@@ -166,7 +166,7 @@ export const Todos = () => {
 
                 <a
                   href="#"
-                  className={classNames(
+                  className={clsx(
                     "absolute inset-0 rounded-md",
                     "ring-blue-400/80 focus:z-10 focus:outline-none focus:ring-2"
                   )}

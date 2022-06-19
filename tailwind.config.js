@@ -1,6 +1,6 @@
 const plugin = require("tailwindcss/plugin")
 const colors = require("tailwindcss/colors")
-const {spacing, borderWidth,fontFamily} = require("tailwindcss/defaultTheme")
+const {spacing, borderWidth, fontFamily} = require("tailwindcss/defaultTheme")
 const svgToDataUri = require("mini-svg-data-uri")
 
 const forms = plugin.withOptions(function (options = {strategy: undefined}) {
@@ -18,12 +18,11 @@ const forms = plugin.withOptions(function (options = {strategy: undefined}) {
 
         const rules = [
             {
-                base: [`[type="checkbox"]`,`[type="ratio"]`],
+                base: [`[type="checkbox"]`, `[type="ratio"]`],
                 styles: {
                     appearance: "none",
                     padding: "0",
                     "print-color-adjust": "exact",
-                    display: "inline-block",
                     "vertical-align": "middle",
                     "background-origin": "border-box",
                     "user-select": "none",
@@ -32,13 +31,13 @@ const forms = plugin.withOptions(function (options = {strategy: undefined}) {
                     width: spacing[4],
                     color: theme("colors.indigo.400", colors.indigo[400]),
                     "background-color": "#fff",
-                    "border-color": theme("colors.gray.500", colors.gray[500]),
+                    "border-color": theme("colors.gray.400", colors.gray[400]),
                     "border-width": borderWidth["DEFAULT"],
                     "--tw-shadow": "0 0 #0000",
                 },
             },
             {
-                base: [`[type='checkbox']:focus`,`[type="ratio"]:focus`],
+                base: [`[type='checkbox']:focus`, `[type="ratio"]:focus`],
                 styles: {
                     outline: "2px solid transparent",
                     "outline-offset": "2px",
@@ -106,6 +105,18 @@ module.exports = {
         "./src/**/*.{jsx,tsx}",
     ],
     theme: {
+        borderWidth: {
+            DEFAULT: "1px",
+            "0": "0",
+            "1.25": "1.25px",
+            "1.5": "1.5px",
+            "2": "2px",
+            "2.25": "2.25px",
+            "3": "3px",
+            "4": "4px",
+            "6": "6px",
+            "8": "8px",
+        },
         extend: {
             maxWidth: {
                 "2xs": "16rem",
@@ -119,6 +130,7 @@ module.exports = {
                 "11/12": "91.7%",
                 "1/20": "5%",
                 "1.25": "0.3125rem",
+                "1.75": "0.4375rem",
             },
             animation: {
                 "spin-slow": "spin 5s linear infinite",

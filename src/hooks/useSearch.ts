@@ -1,6 +1,6 @@
-import {client}                  from "@/libs"
+import {meiliClient} from "@/libs"
 import type {Hits, SearchParams} from "meilisearch"
-import {useEffect, useState}     from "react"
+import {useEffect, useState} from "react"
 
 type Distribution = Record<string, Record<string, number>>
 
@@ -8,7 +8,7 @@ export const useFindOne = (id: string = "", deps?: any[]) => {
     const [data, setData] = useState<Tank>()
 
     const search = async () => {
-        const tank = await client.getDocument(id)
+        const tank = await meiliClient.getDocument(id)
 
         setData(tank)
     }
@@ -30,7 +30,7 @@ export const useSearch = (query?: string, options?: SearchParams, deps?: any[]) 
                   hits,
                   nbHits,
                   facetsDistribution
-              } = await client.search<Tank>(query, options)
+              } = await meiliClient.search<Tank>(query, options)
 
         setData(hits)
         setCount(nbHits)
@@ -47,18 +47,23 @@ export const useSearch = (query?: string, options?: SearchParams, deps?: any[]) 
 export const useFaceted = (facets: string[], query?: string, options?: SearchParams, deps?: any[]) =>
     useSearch(query, {facetsDistribution: facets, ...options}, deps)
 
-export const updateTank = (tank: Tank) => client.updateDocuments([tank])
+export const existTank = async (id: string) => {
+    const res = await meiliClient.search("", {filter: `id = ${id}`})
+    return res.nbHits > 0
+}
 
-export const updateTanks = (tanks: Tank[]) => client.updateDocuments(tanks)
+export const updateTank = (tank: Tank) => meiliClient.updateDocuments([tank])
 
-export const releaseTank = (tank: Tank) => client.updateDocuments([tank])
+export const updateTanks = (tanks: Tank[]) => meiliClient.updateDocuments(tanks)
 
-export const releaseTanks = (tanks: Tank[]) => client.updateDocuments(tanks)
+export const releaseTank = (tank: Tank) => meiliClient.updateDocuments([tank])
 
-export const bindTank = (tank: Tank) => client.updateDocuments([tank])
+export const releaseTanks = (tanks: Tank[]) => meiliClient.updateDocuments(tanks)
 
-export const bindTanks = (tanks: Tank[]) => client.updateDocuments(tanks)
+export const bindTank = (tank: Tank) => meiliClient.updateDocuments([tank])
 
-export const deleteTank = (id: string) => client.deleteDocument(id)
+export const bindTanks = (tanks: Tank[]) => meiliClient.updateDocuments(tanks)
 
-export const deleteTanks = (ids: string[]) => client.deleteDocuments(ids)
+export const deleteTank = (id: string) => meiliClient.deleteDocument(id)
+
+export const deleteTanks = (ids: string[]) => meiliClient.deleteDocuments(ids)

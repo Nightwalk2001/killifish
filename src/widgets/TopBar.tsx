@@ -1,17 +1,21 @@
-import {profileAtom}    from "@/stores"
-import {useNavigate}    from "react-router-dom"
-import {useRecoilValue} from "recoil"
-import {MenuIcon}       from "./MenuIcon"
-import {Profile}        from "./Profile"
+import {profileAtom, queryAtom} from "@/stores"
+import {ChangeEvent} from "react"
+import {useNavigate} from "react-router-dom"
+import {useRecoilValue, useSetRecoilState} from "recoil"
+import {MenuIcon} from "./MenuIcon"
+import {Profile} from "./Profile"
 
 export const TopBar = () => {
   const navigate = useNavigate()
 
-  const profile = useRecoilValue(profileAtom)
+  const profile  = useRecoilValue(profileAtom),
+        setQuery = useSetRecoilState(queryAtom)
 
   const goBack    = () => navigate(-1),
         goForward = () => navigate(1),
         refresh   = () => navigate(0)
+
+  const handleQuery = (ev: ChangeEvent<HTMLInputElement>) =>setQuery(ev.target.value)
 
   return <div
     className={`${profile ? "visible" : "invisible"}
@@ -65,6 +69,7 @@ export const TopBar = () => {
         placeholder={"id/owner/genotype/sexual"}
         className={`w-64 h-9 pl-9 pr-3 py-1 text-sm bg-gray-100 rounded-md outline-none ring-inset select-none
     transition-color duration-150 focus:text-gray-600 focus:bg-white focus:ring-1 focus:ring-gray-300`}
+        onChange={handleQuery}
       />
       <svg viewBox={"0 0 32 32"}
            className={"absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 stroke-current opacity-30"}>
